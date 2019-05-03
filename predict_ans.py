@@ -109,8 +109,8 @@ def main():
     # dev eval
     # load the best model from disk...
 
-    print(f'loading the model from disk........')
-    model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt')
+    f'loading the model from disk........'
+    model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     results, labels = predict_squad(model, dev_data, v2_on=args.v2_on)
     if args.v2_on:
         metric = evaluate_v2(dev_gold, results, na_prob_thresh=args.classifier_threshold)
