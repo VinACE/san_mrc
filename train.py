@@ -162,4 +162,4 @@ def main():
                 logger.warning("Epoch {0} - test ACC: {1:.4f}".format(epoch, test_acc))
 
 if __name__ == '__main__':
-main()
+    main()
