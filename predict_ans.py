@@ -57,11 +57,11 @@ def main():
         dev_labels = load_squad_v2_label(args.dev_gold)
 
     embedding, opt = load_meta(opt, gen_name(args.data_dir, args.meta, version, suffix='pick'))
-    train_data = BatchGen(gen_name(args.data_dir, args.train_data, version),
-                          batch_size=args.batch_size,
-                          gpu=args.cuda,
-                          with_label=args.v2_on,
-                          elmo_on=args.elmo_on)
+    # train_data = BatchGen(gen_name(args.data_dir, args.train_data, version),
+    #                       batch_size=args.batch_size,
+    #                       gpu=args.cuda,
+    #                       with_label=args.v2_on,
+    #                       elmo_on=args.elmo_on)
     dev_data = BatchGen(gen_name(args.data_dir, args.train_data, version),
                           batch_size=args.batch_size,
                           gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
