@@ -19,7 +19,7 @@ def compute_acc(score_list, gold, threshold=0.5):
 
 def gen_name(dir, path, version, suffix='json'):
     fname = '{}-{}.{}'.format(path, version, suffix)
-    print(fname)
+    f'''fname is :{fname}'''
     return os.path.join(dir, fname)
 
 def gen_gold_name(dir, path, version, suffix='json'):
