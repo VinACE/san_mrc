@@ -55,7 +55,6 @@ class BatchGen:
                 cnt += 1
                 if is_train and (len(sample['doc_tok']) > doc_maxlen or \
                                  sample['start'] is None or sample['end'] is None):
-                    #import pdb; pdb.set_trace()
                     print(sample['uid'])
                     continue
                 data.append(sample)

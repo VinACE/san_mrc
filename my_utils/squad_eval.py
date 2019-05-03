@@ -74,7 +74,6 @@ def evaluate(dataset, predictions):
     return {'exact_match': exact_match, 'f1': f1}
 
 if __name__ == '__main__':
-    import pdb;pdb.set_trace()
     expected_version = '1.1'
     parser = argparse.ArgumentParser(
         description='Evaluation for SQuAD ' + expected_version)
