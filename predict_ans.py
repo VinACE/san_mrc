@@ -72,10 +72,10 @@ def main():
     test_data = None
     test_gold = None
 
-    if os.path.exists(test_path):
-        test_data = BatchGen(test_path,
-                            batch_size=args.batch_size,
-                            gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
+    # if os.path.exists(test_path):
+    #     test_data = BatchGen(test_path,
+    #                         batch_size=args.batch_size,
+    #                         gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
 
     # load golden standard
     dev_gold = load_squad(dev_gold_path)
