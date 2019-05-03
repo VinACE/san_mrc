@@ -54,7 +54,7 @@ def main():
     if args.v2_on:
         version = 'v2'
         gold_version = 'v2.0'
-        dev_path = gen_name(args.data_dir, args.dev_gold, version)
+        dev_path = gen_name(args.data_dir, args.dev_gold, gold_version)
         dev_labels = load_squad_v2_label(dev_path)
 
     embedding, opt = load_meta(opt, gen_name(args.data_dir, args.meta, version, suffix='pick'))
