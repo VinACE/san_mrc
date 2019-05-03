@@ -38,7 +38,7 @@ def load_squad(data_path):
         return dataset
 
 def main():
-    import pdb;pdb_settrace()
+    import pdb;pdb.set_trace()
     logger.info('Launching the SAN')
     opt = vars(args)
     logger.info('Loading data')
