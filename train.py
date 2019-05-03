@@ -38,6 +38,7 @@ def load_squad(data_path):
         return dataset
 
 def main():
+    import pdb;pdb_settrace()
     logger.info('Launching the SAN')
     opt = vars(args)
     logger.info('Loading data')
@@ -49,7 +50,7 @@ def main():
 
     test_path = gen_name(args.data_dir, args.test_data, version)
     test_gold_path = gen_gold_name(args.data_dir, args.test_gold, gold_version)
-    import pdb;pdb_settrace()
+    
     if args.v2_on:
         version = 'v2'
         gold_version = 'v2.0'
@@ -162,5 +163,5 @@ def main():
                 logger.warning("Epoch {0} - test ACC: {1:.4f}".format(epoch, test_acc))
 
 if __name__ == '__main__':
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     main()
