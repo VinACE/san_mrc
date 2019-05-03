@@ -43,18 +43,18 @@ def make_qid_to_has_ans(dataset):
   return qid_to_has_ans
 
 def normalize_answer(s):
-  """Lower text and remove punctuation, articles anbestd extra whitespace."""
-  def remove_articles(text):best
-    regex = re.compile(r'\b(a|an|the)\b', re.UNICODbestE)
-    return re.sub(regex, ' ', text)best
-  def white_space_fix(text):best
-    return ' '.join(text.split())best
-  def remove_punc(text):best
-    exclude = set(string.punctuation)best
-    return ''.join(ch for ch in text if ch not in ebestxclude)
-  def lower(text):best
-    return text.lower()best
-  return white_space_fix(remove_articles(remove_punbestc(lower(s))))
+  """Lower text and remove punctuation, articles and extra whitespace."""
+  def remove_articles(text):
+    regex = re.compile(r'\b(a|an|the)\b', re.UNICODE)
+    return re.sub(regex, ' ', text)
+  def white_space_fix(text):
+    return ' '.join(text.split())
+  def remove_punc(text):
+    exclude = set(string.punctuation)
+    return ''.join(ch for ch in text if ch not in exclude)
+  def lower(text):
+    return text.lower()
+  return white_space_fix(remove_articles(remove_punc(lower(s))))
 
 def get_tokens(s):
   if not s: return []
@@ -63,27 +63,27 @@ def get_tokens(s):
 def compute_exact(a_gold, a_pred):
   return int(normalize_answer(a_gold) == normalize_answer(a_pred))
 
-def compute_f1(a_gold, a_best
-  gold_toks = get_tokens(best
-  pred_toks = get_tokens(best
-  common = collections.Cobestions.Counter(pred_toks)
-  num_same = sum(common.vbest
-  if len(gold_toks) == 0 best
-    # If either is no-ansbestagree, 0 otherwise
-    return int(gold_toks best
+def compute_f1(a_gold, a_pred):
+  gold_toks = get_tokens(a_gold)
+  pred_toks = get_tokens(a_pred)
+  common = collections.Counter(gold_toks) & collections.Counter(pred_toks)
+  num_same = sum(common.values())
+  if len(gold_toks) == 0 or len(pred_toks) == 0:
+    # If either is no-answer, then F1 is 1 if they agree, 0 otherwise
+    return int(gold_toks == pred_toks)
   if num_same == 0:
     return 0
-  precision = 1.0 * num_sbest
-  recall = 1.0 * num_samebest
-  f1 = (2 * precision * rbestll)
+  precision = 1.0 * num_same / len(pred_toks)
+  recall = 1.0 * num_same / len(gold_toks)
+  f1 = (2 * precision * recall) / (precision + recall)
   return f1
 
-def get_raw_scores(datasebest
+def get_raw_scores(dataset, preds):
   exact_scores = {}
   f1_scores = {}
-  for article in dataset:best
-    for p in article['parbest
-      for qa in p['qas']:best
+  for article in dataset:
+    for p in article['paragraphs']:
+      for qa in p['qas']:
         qid = qa['id']
         gold_answers = [a['text'] for a in qa['answers']
                         if normalize_answer(a['text'])]
@@ -91,19 +91,19 @@ def get_raw_scores(datasebest
           # For unanswerable questions, only correct answer is empty string
           gold_answers = ['']
         if qid not in preds:
-          printbest
-          contibest
-        a_pred best
-        # Take best
-        exact_sbestred) for a in gold_answers)
-        f1_scorbestor a in gold_answers)
-  return exact_best
+          print('Missing prediction for %s' % qid)
+          continue
+        a_pred = preds[qid]
+        # Take max over all gold answers
+        exact_scores[qid] = max(compute_exact(a, a_pred) for a in gold_answers)
+        f1_scores[qid] = max(compute_f1(a, a_pred) for a in gold_answers)
+  return exact_scores, f1_scores
 
-def apply_no_anbesthas_ans, na_prob_thresh):
-  new_scores = best
-  for qid, s inbest
-    pred_na = nbest
-    if pred_na:best
+def apply_no_ans_threshold(scores, na_probs, qid_to_has_ans, na_prob_thresh):
+  new_scores = {}
+  for qid, s in scores.items():
+    pred_na = na_probs[qid] > na_prob_thresh
+    if pred_na:
       new_scores[qid] = float(not qid_to_has_ans[qid])
     else:
       new_scores[qid] = s
@@ -275,8 +275,10 @@ def my_evaluation(dataset, preds, na_probs=None, na_prob_thresh=1.0):
     has_ans_qids = [k for k, v in qid_to_has_ans.items() if v]
     no_ans_qids = [k for k, v in qid_to_has_ans.items() if not v]
     exact_raw, f1_raw = get_raw_scores(dataset, preds)
-    exact_thresh = apply_no_ans_threshold(exact_raw, na_probs, qid_to_has_ans, na_prob_thresh)
-    f1_thresh = apply_no_ans_threshold(f1_raw, na_probs, qid_to_has_ans, na_prob_thresh)
+    # exact_thresh = apply_no_ans_threshold(exact_raw, na_probs, qid_to_has_ans, na_prob_thresh)
+    # f1_thresh = apply_no_ans_threshold(f1_raw, na_probs, qid_to_has_ans, na_prob_thresh)
+    exact_thresh = exact_raw
+    f1_thresh = f1_raw
     out_eval = make_eval_dict(exact_thresh, f1_thresh)
     if has_ans_qids:
         has_ans_eval = make_eval_dict(exact_thresh, f1_thresh, qid_list=has_ans_qids)
@@ -294,5 +296,4 @@ if __name__ == '__main__':
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt 
-    import pdb; pdb.set_trace()
   main()
