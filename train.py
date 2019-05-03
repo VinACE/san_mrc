@@ -49,7 +49,7 @@ def main():
 
     test_path = gen_name(args.data_dir, args.test_data, version)
     test_gold_path = gen_gold_name(args.data_dir, args.test_gold, gold_version)
-
+    import pdb;pdb_settrace()
     if args.v2_on:
         version = 'v2'
         gold_version = 'v2.0'
