@@ -32,7 +32,7 @@ class BatchGen:
         self.dropout_w = dropout_w
         self.dw_type = dw_type
         self.elmo_on = elmo_on
-
+        print(f'data_path {self.data_path}')
         self.data = self.load(self.data_path, is_train, doc_maxlen)
 
         if is_train:
