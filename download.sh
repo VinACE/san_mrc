@@ -28,3 +28,8 @@ wget https://s3.amazonaws.com/research.metamind.io/cove/wmtlstm-b142a7f2.pth -O 
 # Download ELMo
 wget https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5 -O $DATA_DIR/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5
 wget https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json -O $DATA_DIR/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json
+
+
+## evaluation script location....
+https://worksheets.codalab.org/rest/bundles/0x8731effab84f41b7b874a070e40f61e2/contents/blob/
+https://worksheets.codalab.org/rest/bundles/0x8731effab84f41b7b874a070e40f61e2/contents/blob/
