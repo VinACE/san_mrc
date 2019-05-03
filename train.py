@@ -32,6 +32,7 @@ set_environment(args.seed, args.cuda)
 logger =  create_logger(__name__, to_disk=True, log_file=args.log_file)
 
 def load_squad(data_path):
+    import pdb;pdb.set_trace()
     with open(data_path) as dataset_file:
         dataset_json = json.load(dataset_file)
         dataset = dataset_json['data']
