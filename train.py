@@ -38,7 +38,6 @@ def load_squad(data_path):
         return dataset
 
 def main():
-    import pdb;pdb.set_trace()
     logger.info('Launching the SAN')
     opt = vars(args)
     logger.info('Loading data')
@@ -50,12 +49,11 @@ def main():
 
     test_path = gen_name(args.data_dir, args.test_data, version)
     test_gold_path = gen_gold_name(args.data_dir, args.test_gold, gold_version)
-    
+
     if args.v2_on:
         version = 'v2'
         gold_version = 'v2.0'
-        dev_path = gen_name(args.data_dir, args.dev_gold, gold_version)
-        dev_labels = load_squad_v2_label(dev_path)
+        dev_labels = load_squad_v2_label(args.dev_gold)
 
     embedding, opt = load_meta(opt, gen_name(args.data_dir, args.meta, version, suffix='pick'))
     train_data = BatchGen(gen_name(args.data_dir, args.train_data, version),
@@ -164,5 +162,4 @@ def main():
                 logger.warning("Epoch {0} - test ACC: {1:.4f}".format(epoch, test_acc))
 
 if __name__ == '__main__':
-    # import pdb; pdb.set_trace()
-    main()
+main()
