@@ -65,6 +65,7 @@ def main():
     dev_data = BatchGen(gen_name(args.data_dir, args.train_data, version),
                           batch_size=args.batch_size,
                           gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
+                          
 
 
 
