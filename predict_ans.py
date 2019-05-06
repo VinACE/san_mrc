@@ -118,7 +118,7 @@ def main():
     try:
         checkpoint_test.eval()
     except AttributeError as error:
-        print error
+        f'error {error}'
     ### 'dict' object has no attribute 'eval'
 
     model.load_state_dict(checkpoint_test['state_dict'])
