@@ -108,6 +108,7 @@ def build_span(context, answer, context_token, answer_start, answer_end, is_trai
 
 def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train, v2_on=False):
     # features
+    import pdb;pdb.set_trace()
     fea_dict = {}
     fea_dict['uid'] = sample['uid']
     if v2_on and is_train:
