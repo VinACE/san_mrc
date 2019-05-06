@@ -86,6 +86,7 @@ def main():
         test_gold = load_squad(test_gold_path)
 
     model = DocReaderModel(opt, embedding)  ### model = your_model()
+    
     # model meta str
     headline = '############# Model Arch of SAN #############'
     # print network
@@ -115,6 +116,7 @@ def main():
 
     # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
+    print(checkpoint_test.keys())
     try:
         checkpoint_test.eval()
     except AttributeError as error:
