@@ -31,7 +31,7 @@ def predict_squad(model, data, v2_on=False):
     span_predictions = {}
     label_predictions = {}
     for batch in data:
-        uid_test = batch['uid']
+        uid_test = batch['uids']
         batch_test['context'] = batch['context']
         phrase, spans, scores = model.predict(batch)
         uids = batch['uids']
