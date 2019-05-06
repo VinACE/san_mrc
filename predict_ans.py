@@ -123,7 +123,7 @@ def main():
         f'error {error}'
     ### 'dict' object has no attribute 'eval'
 
-    model.load_state_dict(checkpoint_test['state_dict'])
+    model.network.load_state_dict(checkpoint_test['state_dict'])
     ### now you can evaluate it
     model.eval()
 
