@@ -144,8 +144,10 @@ def main():
                 model.scheduler.step()
         # save
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
+        model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
 
         model.save(model_file, epoch)
+        torch.save(model, model_file_2)
         if em + f1 > best_em_score + best_f1_score:
             copyfile(os.path.join(model_dir, model_file), os.path.join(model_dir, 'best_{}_checkpoint.pt'.format(version)))
             best_em_score, best_f1_score = em, f1
