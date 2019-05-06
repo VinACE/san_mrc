@@ -26,7 +26,8 @@ def gen_gold_name(dir, path, version, suffix='json'):
     return os.path.join(dir, fname)
 
 def predict_squad(model, data, v2_on=False):
-    data.reset()
+    import pdb;pdb.set_trace()
+    # data.reset()
     span_predictions = {}
     label_predictions = {}
     for batch in data:
