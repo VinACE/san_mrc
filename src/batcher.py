@@ -1,4 +1,3 @@
-# is_train=False  fro prediction.. BAtchGen  def __init__
 import os
 import sys
 import json
@@ -33,8 +32,7 @@ class BatchGen:
         self.dropout_w = dropout_w
         self.dw_type = dw_type
         self.elmo_on = elmo_on
-        print(f'data_path {self.data_path}')
-        # import pdb; pdb.set_trace()
+
         self.data = self.load(self.data_path, is_train, doc_maxlen)
 
         if is_train:
@@ -57,6 +55,7 @@ class BatchGen:
                 cnt += 1
                 if is_train and (len(sample['doc_tok']) > doc_maxlen or \
                                  sample['start'] is None or sample['end'] is None):
+                    #import pdb; pdb.set_trace()
                     print(sample['uid'])
                     continue
                 data.append(sample)
