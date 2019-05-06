@@ -99,6 +99,8 @@ def main():
 
     best_em_score, best_f1_score = 0.0, 0.0
     
+    # test epoch value..
+    epoch = 2
     # for epoch in range(0, args.epoches):
     #     logger.warning('At epoch {}'.format(epoch))
     #     train_data.reset()
@@ -117,7 +119,7 @@ def main():
     # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     # checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     model = torch.load(path1)
-    
+
    
     results, labels = predict_squad(model, dev_data, v2_on=args.v2_on)
     if args.v2_on:
