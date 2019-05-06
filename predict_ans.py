@@ -1,4 +1,5 @@
 # python predict_ans.py --dev_data  dev-v1.0.json
+# # is_train=False  fro prediction.. BAtchGen  def __init__ in batcher.py file
 import re
 import os
 import sys

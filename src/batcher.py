@@ -1,3 +1,4 @@
+# is_train=False  fro prediction.. BAtchGen  def __init__
 import os
 import sys
 import json
@@ -33,7 +34,7 @@ class BatchGen:
         self.dw_type = dw_type
         self.elmo_on = elmo_on
         print(f'data_path {self.data_path}')
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         self.data = self.load(self.data_path, is_train, doc_maxlen)
 
         if is_train:

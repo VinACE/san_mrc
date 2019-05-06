@@ -26,13 +26,14 @@ def gen_gold_name(dir, path, version, suffix='json'):
     return os.path.join(dir, fname)
 
 def predict_squad(model, data, v2_on=False):
-    # import pdb;pdb.set_trace()
+    import pdb;pdb.set_trace()
     # data.reset()
     span_predictions = {}
     label_predictions = {}
+
     for batch in data:
         uid_test = batch['uids']
-        batch_test['context'] = batch['context']
+        # batch_test['context'] = batch['context']
         phrase, spans, scores = model.predict(batch)
         uids = batch['uids']
         for uid, pred in zip(uids, phrase):
