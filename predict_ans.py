@@ -1,5 +1,6 @@
 # python predict_ans.py --dev_data  dev-v1.0.json
 # # is_train=False  fro prediction.. BAtchGen  def __init__ in batcher.py file
+# def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train=False, v2_on=False):
 import re
 import os
 import sys

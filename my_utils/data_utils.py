@@ -106,7 +106,7 @@ def build_span(context, answer, context_token, answer_start, answer_end, is_trai
     else:
         return (t_start, t_end, t_span)
 
-def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train, v2_on=False):
+def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train=False, v2_on=False):
     # features
     import pdb;pdb.set_trace()
     fea_dict = {}
