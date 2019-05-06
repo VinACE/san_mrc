@@ -85,7 +85,7 @@ def main():
     if os.path.exists(test_gold_path):
         test_gold = load_squad(test_gold_path)
 
-    model = DocReaderModel(opt, embedding)
+    model = DocReaderModel(opt, embedding)  ### model = your_model()
     # model meta str
     headline = '############# Model Arch of SAN #############'
     # print network
@@ -112,7 +112,19 @@ def main():
     # load the best model from disk...
     # import pdb;pdb.set_trace()
     f'loading the model from disk........'
-    model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
+
+    # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
+    checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
+    try:
+        checkpoint_test.eval()
+    except AttributeError as error:
+        print error
+    ### 'dict' object has no attribute 'eval'
+
+    model.load_state_dict(checkpoint_test['state_dict'])
+    ### now you can evaluate it
+    model.eval()
+
     results, labels = predict_squad(model, dev_data, v2_on=args.v2_on)
     if args.v2_on:
         metric = evaluate_v2(dev_gold, results, na_prob_thresh=args.classifier_threshold)
