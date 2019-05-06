@@ -26,14 +26,10 @@ def gen_gold_name(dir, path, version, suffix='json'):
     return os.path.join(dir, fname)
 
 def predict_squad(model, data, v2_on=False):
-    import pdb;pdb.set_trace()
-    # data.reset()
+    data.reset()
     span_predictions = {}
     label_predictions = {}
-
     for batch in data:
-        uid_test = batch['uids']
-        # batch_test['context'] = batch['context']
         phrase, spans, scores = model.predict(batch)
         uids = batch['uids']
         for uid, pred in zip(uids, phrase):
@@ -108,7 +104,6 @@ def build_span(context, answer, context_token, answer_start, answer_end, is_trai
 
 def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train=False, v2_on=False):
     # features
-    import pdb;pdb.set_trace()
     fea_dict = {}
     fea_dict['uid'] = sample['uid']
     if v2_on and is_train:
@@ -139,7 +134,7 @@ def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, 
     fea_dict['end'] = end
     return fea_dict
 
-def build_data(data, vocab, vocab_tag, vocab_ner, fout, is_train, thread=16, NLP=None, v2_on=False):
+def build_data(data, vocab, vocab_tag, vocab_ner, fout, is_train=False, thread=16, NLP=None, v2_on=False):
     passages = [reform_text(sample['context']) for sample in data]
     passage_tokened = [doc for doc in NLP.pipe(passages, batch_size=1000, n_threads=thread)]
     logger.info('Done with document tokenize')
