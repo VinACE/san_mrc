@@ -44,8 +44,8 @@ def main():
     logger.info('Launching the SAN')
     opt = vars(args)
     logger.info('Loading data')
-    version = 'v2'
-    gold_version = 'v2.0'
+    version = 'v1'
+    gold_version = 'v1.1'
 
     dev_path = gen_name(args.data_dir, args.dev_data, version)
     dev_gold_path = gen_gold_name(args.data_dir, args.dev_gold, gold_version)
