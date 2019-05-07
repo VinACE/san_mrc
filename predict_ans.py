@@ -36,6 +36,7 @@ logger =  create_logger(__name__, to_disk=True, log_file=args.log_file)
 
 def load_squad(data_path):
     with open(data_path) as dataset_file:
+        import pdb;pdb.set_trace()
         dataset_json = json.load(dataset_file)
         dataset = dataset_json['data']
         return dataset
@@ -64,6 +65,7 @@ def main():
     #                       gpu=args.cuda,
     #                       with_label=args.v2_on,
     #                       elmo_on=args.elmo_on)
+    # import pdb; pdb.set_trace()
     dev_data = BatchGen(gen_name(args.data_dir, args.dev_data, version),
                           batch_size=args.batch_size,
                           gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
@@ -113,7 +115,7 @@ def main():
     #                 str((datetime.now() - start) / (i + 1) * (len(train_data) - i - 1)).split('.')[0]))
     # dev eval
     # load the best model from disk...
-    import pdb;pdb.set_trace()
+    # import pdb;pdb.set_trace()
     f'loading the model from disk........'
     path1 = '/home/ofsdms/san_mrc/checkpoint/checkpoint_v1_epoch_1_full_model.pt'
     # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
