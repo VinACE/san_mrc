@@ -35,6 +35,7 @@ Or pull our published docker: allenlao/pytorch-allennlp-rt
    > python prepro.py
 2. train a model
    > python train.py
+   > python train.py --epoches 2
 
 ### Train a SAN Model on SQuAD v2.0
 1. preprocess data
