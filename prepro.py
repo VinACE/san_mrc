@@ -39,7 +39,14 @@ def load_data(path, is_train=True, v2_on=False):
             context = paragraph['context']
             if v2_on:
                 context = '{} {}'.format(context, END)
-            for qa in paragraph['qas']:
+            num_q = len(paragraph['qas'])
+            ## TO GET FIRST AND LAST NAME THE NUMBER OF QUESTIONS IS ONLY 2 , SHOULD CHANGE IT TO 3 IF WE WANT TO ADD DOB
+            req_num_questions = 2   #CHANGE THIS TO 3 TO ADD DOB IN THE TRAINING
+            if num_q > req_num_questions:
+                req_num_q = req_num_questions
+            else:
+                req_num_q = num_q
+            for qa in paragraph['qas'][:req_num_q]:
                 uid, question = qa['id'], qa['question']
                 answers = qa.get('answers', [])
                 # used for v2.0
