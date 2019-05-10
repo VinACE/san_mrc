@@ -9,8 +9,8 @@ import numpy as np
 import pickle as pkl
 from shutil import copyfile
 from my_utils.tokenizer import UNK_ID
-from allennlp.modules.elmo import batch_to_ids
-from allennlp.data.token_indexers.elmo_indexer import ELMoCharacterMapper
+#from allennlp.modules.elmo import batch_to_ids
+#from allennlp.data.token_indexers.elmo_indexer import ELMoCharacterMapper
 
 def load_meta(opt, meta_path):
     with open(meta_path, 'rb') as f:
@@ -22,7 +22,7 @@ def load_meta(opt, meta_path):
     return embedding, opt
 
 class BatchGen:
-    def __init__(self, data_path, batch_size, gpu, is_train=True, doc_maxlen=1000, dropout_w=0.05, dw_type=0,
+    def __init__(self, data_path, batch_size, gpu, is_train=False, doc_maxlen=1000, dropout_w=0.05, dw_type=0,
                  with_label=False, elmo_on=False):
         self.batch_size = batch_size
         self.doc_maxlen = doc_maxlen
