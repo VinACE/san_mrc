@@ -50,7 +50,11 @@ def load_data(path, is_train=True, v2_on=False):
                     if len(answers) > 0:
                         answer = answers[0]['text']
                         answer_start = answers[0]['answer_start']
+                        ## IF the answer in OCR doesn't match the DB answer then we are not using it for prelim training.
+                        if answer_start == -1:
+                            continue
                         answer_end = answer_start + len(answer)
+
                         if v2_on:
                             sample = {'uid': uid, 'context': context, 'question': question, 'answer': answer, 'answer_start': answer_start, 'answer_end':answer_end, 'label': label}
                         else:
