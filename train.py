@@ -63,10 +63,13 @@ def main():
                           gpu=args.cuda,
                           with_label=args.v2_on,
                           elmo_on=args.elmo_on)
+    print('train data loaded')
+    print(len(train_data))
     dev_data = BatchGen(gen_name(args.data_dir, args.dev_data, version),
                           batch_size=args.batch_size,
                           gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
-                          
+    print('test data loaded')                      
+    print(len(dev_data))
 
 
 
