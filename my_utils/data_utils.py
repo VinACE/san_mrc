@@ -136,11 +136,11 @@ def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, 
 
 def build_data(data, vocab, vocab_tag, vocab_ner, fout, is_train, thread=16, NLP=None, v2_on=False):
     passages = [reform_text(sample['context']) for sample in data]
-    passage_tokened = [doc for doc in NLP.pipe(passages, batch_size=10, n_threads=thread)]
+    passage_tokened = [doc for doc in NLP.pipe(passages, batch_size=1, n_threads=thread)]
     logger.info('Done with document tokenize')
 
     question_list = [reform_text(sample['question']) for sample in data]
-    question_tokened = [question for question in NLP.pipe(question_list, batch_size=10, n_threads=thread)]
+    question_tokened = [question for question in NLP.pipe(question_list, batch_size=1, n_threads=thread)]
     logger.info('Done with query tokenize')
     dropped_sample = 0
     with open(fout, 'w', encoding='utf-8') as writer:
