@@ -145,7 +145,7 @@ def train_config(parser):
     parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available(),
                         help='Use GPU acceleration.')
     parser.add_argument('--log_per_updates', type=int, default=100)
-    parser.add_argument('--epoches', type=int, default=50)
+    parser.add_argument('--epoches', type=int, default=2)
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--optimizer', default='adamax')
     parser.add_argument('--grad_clipping', type=float, default=5)
