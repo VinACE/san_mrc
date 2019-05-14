@@ -132,7 +132,7 @@ def data_config(parser):
     parser.add_argument('--test_gold', default='test',
                         help='path to preprocessed validation data file.')
     parser.add_argument('--covec_path', default='data/MT-LSTM.pt')
-    parser.add_argument('--glove', default='data/glove.840B.300d.txt',
+    parser.add_argument('--glove', default='data/glove.6B.300d.txt',
                         help='path to word vector file.')
     parser.add_argument('--sort_all', action='store_true',
                         help='sort the vocabulary by frequencies of all words.'
