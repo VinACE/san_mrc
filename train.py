@@ -99,7 +99,7 @@ def main():
     writer = SummaryWriter('./runs/')
     for epoch in range(0, args.epoches):
         logger.warning('At epoch {}'.format(epoch))
-        train_da    writer = SummaryWriter()ta.reset()
+        train_data.reset()
         start = datetime.now()
         for i, batch in enumerate(train_data):
             model.update(batch)
