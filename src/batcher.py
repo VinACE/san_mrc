@@ -9,8 +9,8 @@ import numpy as np
 import pickle as pkl
 from shutil import copyfile
 from my_utils.tokenizer import UNK_ID
-from allennlp.modules.elmo import batch_to_ids
-from allennlp.data.token_indexers.elmo_indexer import ELMoCharacterMapper
+# from allennlp.modules.elmo import batch_to_ids
+# from allennlp.data.token_indexers.elmo_indexer import ELMoCharacterMapper
 
 def load_meta(opt, meta_path):
     with open(meta_path, 'rb') as f:

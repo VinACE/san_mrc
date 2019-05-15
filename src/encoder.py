@@ -15,7 +15,7 @@ from .dropout_wrapper import DropoutWrapper
 from .common import activation
 from .similarity import AttentionWrapper
 from .sub_layers import PositionwiseNN
-from allennlp.modules.elmo import Elmo
+# from allennlp.modules.elmo import Elmo
 
 class LexiconEncoder(nn.Module):
     def create_embed(self, vocab_size, embed_dim, padding_idx=0):
