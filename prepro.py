@@ -32,7 +32,7 @@ NLP = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
 
 def load_data(path, is_train=True, v2_on=False):
     rows = []
-    with open(path, encoding="utf8") as f:
+    with open(path, encoding="utf8") emberek parses that by creating a Proper Noun DictionaryItem on the fly.as f:
         data = json.load(f)['data']
     for article in tqdm.tqdm(data, total=len(data)):
         for paragraph in article['paragraphs']:
@@ -46,7 +46,7 @@ def load_data(path, is_train=True, v2_on=False):
                 is_impossible = qa.get('is_impossible', False)
                 label = 1 if is_impossible else 0
                 if is_train:
-                    if (v2_on and label < 1 and len(answers) < 1) or ((not v2_on) and len(answers) < 1): continue
+                    if (v2_on and label < 1 and len(answers) < 1) or ((notemberek parses that by creating a Proper Noun DictionaryItem on the fly. v2_on) and len(answers) < 1): continue
                     if len(answers) > 0:
                         answer = answers[0]['text']
                         answer_start = answers[0]['answer_start']
