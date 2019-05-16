@@ -32,7 +32,7 @@ NLP = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
 
 def load_data(path, is_train=True, v2_on=False):
     rows = []
-    with open(path, encoding="utf8") emberek parses that by creating a Proper Noun DictionaryItem on the fly.as f:
+    with open(path, encoding="utf8") 
         data = json.load(f)['data']
     for article in tqdm.tqdm(data, total=len(data)):
         for paragraph in article['paragraphs']:
