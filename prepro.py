@@ -32,21 +32,28 @@ NLP = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
 
 def load_data(path, is_train=True, v2_on=False):
     rows = []
-    with open(path, encoding="utf8"):
+    with open(path, encoding="utf8") as f:
         data = json.load(f)['data']
     for article in tqdm.tqdm(data, total=len(data)):
         for paragraph in article['paragraphs']:
             context = paragraph['context']
             if v2_on:
                 context = '{} {}'.format(context, END)
-            for qa in paragraph['qas']:
+            num_q = len(paragraph['qas'])
+            ## TO GET FIRST AND LAST NAME THE NUMBER OF QUESTIONS IS ONLY 2 , SHOULD CHANGE IT TO 3 IF WE WANT TO ADD DOB
+            req_num_questions = 2   #CHANGE THIS TO 3 TO ADD DOB IN THE TRAINING
+            if num_q > req_num_questions:
+                req_num_q = req_num_questions
+            else:
+                req_num_q = num_q
+            for qa in paragraph['qas'][:req_num_q]:
                 uid, question = qa['id'], qa['question']
                 answers = qa.get('answers', [])
                 # used for v2.0
                 is_impossible = qa.get('is_impossible', False)
                 label = 1 if is_impossible else 0
                 if is_train:
-                    if (v2_on and label < 1 and len(answers) < 1) or ((notemberek parses that by creating a Proper Noun DictionaryItem on the fly. v2_on) and len(answers) < 1): continue
+                    if (v2_on and label < 1 and len(answers) < 1) or ((not v2_on) and len(answers) < 1) : continue
                     if len(answers) > 0:
                         answer = answers[0]['text']
                         answer_start = answers[0]['answer_start']
@@ -54,7 +61,6 @@ def load_data(path, is_train=True, v2_on=False):
                         if answer_start == -1:
                             continue
                         answer_end = answer_start + len(answer)
-
                         if v2_on:
                             sample = {'uid': uid, 'context': context, 'question': question, 'answer': answer, 'answer_start': answer_start, 'answer_end':answer_end, 'label': label}
                         else:
