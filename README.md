@@ -72,3 +72,5 @@ Related:
 2. <a href="https://arxiv.org/abs/1804.07888">NLI</a>
 
 
+# glove download for different dimension...
+https://github.com/chakki-works/chakin#supported-vectors
