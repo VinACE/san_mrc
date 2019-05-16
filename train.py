@@ -21,7 +21,6 @@ from my_utils.data_utils import predict_squad, gen_name, gen_gold_name, load_squ
 from my_utils.squad_eval_v2 import my_evaluation as evaluate_v2
 from tensorboardX import SummaryWriter
 
-
 args = set_args()
 # set model dir
 model_dir = args.model_dir
@@ -63,13 +62,10 @@ def main():
                           gpu=args.cuda,
                           with_label=args.v2_on,
                           elmo_on=args.elmo_on)
-    print('train data loaded')
-    print(len(train_data))
     dev_data = BatchGen(gen_name(args.data_dir, args.dev_data, version),
                           batch_size=args.batch_size,
                           gpu=args.cuda, is_train=False, elmo_on=args.elmo_on)
-    print('test data loaded')                      
-    print(len(dev_data))
+                          
 
 
 
@@ -84,13 +80,10 @@ def main():
     # load golden standard
     dev_gold = load_squad(dev_gold_path)
 
-    if os.path.exists(test_gold_path):pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
-pip3 install torchvision
-        test_gold = load_squad(test_gopip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
-pip3 install torchvision
+    if os.path.exists(test_gold_path):
+        test_gold = load_squad(test_gold_path)
 
-    model = DocReaderModel(opt, embeddpip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
-pip3 install torchvision
+    model = DocReaderModel(opt, embedding)
     # model meta str
     headline = '############# Model Arch of SAN #############'
     # print network
@@ -102,7 +95,8 @@ pip3 install torchvision
         model.cuda()
 
     best_em_score, best_f1_score = 0.0, 0.0
-    writer = SummaryWriter('./runs/')
+    #### Please create a directory named 'runs' and pass the path into the summary writer
+    writer = SummaryWriter()
     for epoch in range(0, args.epoches):
         logger.warning('At epoch {}'.format(epoch))
         train_data.reset()
@@ -152,13 +146,10 @@ pip3 install torchvision
                 model.scheduler.step()
         # save
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
-
         model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
-
         writer.add_scalar('F1 score', f1, epoch)
         model.save(model_file, epoch)
         torch.save(model, model_file_2)
-
         if em + f1 > best_em_score + best_f1_score:
             copyfile(os.path.join(model_dir, model_file), os.path.join(model_dir, 'best_{}_checkpoint.pt'.format(version)))
             best_em_score, best_f1_score = em, f1
