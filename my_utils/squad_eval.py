@@ -58,7 +58,6 @@ def evaluate(dataset, predictions):
             for qa in paragraph['qas']:
                 total += 1
                 if qa['id'] not in predictions:
-                    import pdb; pdb.set_trace()
                     message = 'Unanswered question ' + str(qa['id']) + \
                               ' will receive score 0.'
                     print(message, file=sys.stderr)
