@@ -34,7 +34,9 @@ def predict_squad(model, data, v2_on=False):
         import pdb;pdb.set_trace()
         uids = batch['uids']
         for uid, pred in zip(uids, phrase):
+            import pdb;pdb.set_trace()
             span_predictions[uid] = pred
+            import pdb;pdb.set_trace()
         if v2_on:
             for uid, pred in zip(uids, scores):
                 label_predictions[uid] = pred
