@@ -45,7 +45,7 @@ class BatchGen:
         self.offset = 0
         self.with_label = with_label
 
-    def load(self, path, is_train=True, doc_maxlen=1000):
+    def load(self, path, is_train=True, doc_maxlen=1000): ### TODO increase the doc length and see
         with open(path, 'r', encoding='utf-8') as reader:
             # filter
             data = []

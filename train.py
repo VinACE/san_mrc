@@ -84,10 +84,13 @@ def main():
     # load golden standard
     dev_gold = load_squad(dev_gold_path)
 
-    if os.path.exists(test_gold_path):
-        test_gold = load_squad(test_gold_path)
+    if os.path.exists(test_gold_path):pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
+pip3 install torchvision
+        test_gold = load_squad(test_gopip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
+pip3 install torchvision
 
-    model = DocReaderModel(opt, embedding)
+    model = DocReaderModel(opt, embeddpip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl
+pip3 install torchvision
     # model meta str
     headline = '############# Model Arch of SAN #############'
     # print network
@@ -149,10 +152,11 @@ def main():
                 model.scheduler.step()
         # save
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
-        model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version,         epoch))
+
+        model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
 
         writer.add_scalar('F1 score', f1, epoch)
-        #model.save(model_file, epoch)
+        model.save(model_file, epoch)
         torch.save(model, model_file_2)
 
         if em + f1 > best_em_score + best_f1_score:
