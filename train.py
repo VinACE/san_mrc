@@ -144,7 +144,7 @@ def main():
                 model.scheduler.step(f1, epoch=epoch)
             else:
                 model.scheduler.step()
-        # save
+        # save 
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
         model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
         writer.add_scalar('F1 score', f1, epoch)
