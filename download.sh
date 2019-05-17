@@ -17,10 +17,10 @@ wget https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json -O $DATA_D
 wget https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json -O $DATA_DIR/train-v2.0.json
 wget https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json -O $DATA_DIR/dev-v2.0.json
 
-# Download GloVe
-wget http://nlp.stanford.edu/data/glove.840B.300d.zip -O $DATA_DIR/glove.840B.300d.zip
-unzip $DATA_DIR/glove.840B.300d.zip -d $DATA_DIR
-rm $DATA_DIR/glove.840B.300d.zip
+# # Download GloVe
+# wget http://nlp.stanford.edu/data/glove.840B.300d.zip -O $DATA_DIR/glove.840B.300d.zip
+# unzip $DATA_DIR/glove.840B.300d.zip -d $DATA_DIR
+# rm $DATA_DIR/glove.840B.300d.zip
 
 # Download CoVe
 wget https://s3.amazonaws.com/research.metamind.io/cove/wmtlstm-b142a7f2.pth -O $DATA_DIR/MT-LSTM.pt
@@ -33,3 +33,9 @@ wget https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_
 ## evaluation script location....
 https://worksheets.codalab.org/rest/bundles/0x8731effab84f41b7b874a070e40f61e2/contents/blob/
 https://worksheets.codalab.org/rest/bundles/0x8731effab84f41b7b874a070e40f61e2/contents/blob/
+
+# fast text download
+
+wget https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M-subword.zip -O $DATA_DIR/crawl-300d-2M-subword.zip
+unzip $DATA_DIR/crawl-300d-2M-subword.zip -d $DATA_DIR
+rm $DATA_DIR/crawl-300d-2M-subword.zip
