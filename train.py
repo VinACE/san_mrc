@@ -19,6 +19,7 @@ from my_utils.log_wrapper import create_logger
 from my_utils.squad_eval import evaluate
 from my_utils.data_utils import predict_squad, gen_name, gen_gold_name, load_squad_v2_label, compute_acc
 from my_utils.squad_eval_v2 import my_evaluation as evaluate_v2
+from tensorboardX import SummaryWriter
 
 args = set_args()
 # set model dir
@@ -94,7 +95,8 @@ def main():
         model.cuda()
 
     best_em_score, best_f1_score = 0.0, 0.0
-
+    #### Please create a directory named 'runs' and pass the path into the summary writer
+    writer = SummaryWriter()
     for epoch in range(0, args.epoches):
         logger.warning('At epoch {}'.format(epoch))
         train_data.reset()
@@ -145,8 +147,8 @@ def main():
         # save
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
         model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
-
-        model.save(model_file, epoch)
+        writer.add_scalar('F1 score', f1, epoch)
+        #model.save(model_file, epoch)
         torch.save(model, model_file_2)
         if em + f1 > best_em_score + best_f1_score:
             copyfile(os.path.join(model_dir, model_file), os.path.join(model_dir, 'best_{}_checkpoint.pt'.format(version)))
