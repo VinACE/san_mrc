@@ -148,6 +148,8 @@ def main():
         model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
         model_file_2 = os.path.join(model_dir, 'checkpoint_{}_epoch_{}_full_model.pt'.format(version, epoch))
         writer.add_scalar('F1 score', f1, epoch)
+        writer.add_scalar('EM score', em, epoch)
+        writer.add_scalar('Loss func at Epoch', model.train_loss.avg,epoch)
         model.save(model_file, epoch)
         torch.save(model, model_file_2)
         if em + f1 > best_em_score + best_f1_score:
