@@ -146,6 +146,9 @@ def main():
     # logger.info('building training data')
     # train_fout = gen_name(args.data_dir, args.train_data, version)
     # build_data(train_data, vocab, vocab_tag, vocab_ner, train_fout, True, NLP=NLP, v2_on=v2_on)
+    vocab = meta['vocab']
+    vocab_tag = meta['vocab_tag']
+    vocab_ner = meta['vocab_ner']
 
     logger.info('building dev data')
     dev_fout = gen_name(args.data_dir, args.dev_data, version)
