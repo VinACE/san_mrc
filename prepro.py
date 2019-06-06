@@ -136,8 +136,10 @@ def main():
     logger.info('building embedding')
     # embedding = build_embedding(emb_path, vocab, embedding_dim, fast_vec_format=args.fasttext_on)
     # meta = {'vocab': vocab, 'vocab_tag': vocab_tag, 'vocab_ner': vocab_ner, 'embedding': embedding}
-    with open(meta_path, 'wb') as f:
-        pickle.dump(meta, f)
+    # load the meta pickle file
+    meta = pickle.load(./data/meta_v1.pick)
+    # with open(meta_path, 'wb') as f:
+    #     pickle.dump(meta, f)
 
     # logger.info('building training data')
     # train_fout = gen_name(args.data_dir, args.train_data, version)
