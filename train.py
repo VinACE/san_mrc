@@ -83,7 +83,11 @@ def main():
     if os.path.exists(test_gold_path):
         test_gold = load_squad(test_gold_path)
 
-    model = DocReaderModel(opt, embedding)
+    # model = DocReaderModel(opt, embedding)
+    # performing a transfer learning  
+    # https://pytorch.org/tutorials/beginner/saving_loading_models.html
+    mdoel = torch.load("./checkpoint/checkpoint_v1_epoch_2_full_model.pt")
+
     # model meta str
     headline = '############# Model Arch of SAN #############'
     # print network
