@@ -119,8 +119,9 @@ def main():
     wemb_vocab = load_emb_vocab(emb_path, embedding_dim, fast_vec_format=args.fasttext_on)
     logger.info('Build vocabulary')
 
-    vocab, _, _ = build_vocab(dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
-    logger.info('Done with vocabulary collection')
+    # commenting out the vocab building section.. as it is not needed for testing
+    # vocab, _, _ = build_vocab(dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
+    # logger.info('Done with vocabulary collection')
 
     # loading ner/pos tagging vocab
     resource_path = 'resource'
