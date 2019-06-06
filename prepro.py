@@ -118,7 +118,8 @@ def main():
     ## TODO Need to candle this loading only once...
     wemb_vocab = load_emb_vocab(emb_path, embedding_dim, fast_vec_format=args.fasttext_on)
     logger.info('Build vocabulary')
-    vocab, _, _ = build_vocab(train_data + dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
+
+    vocab, _, _ = build_vocab(dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
     logger.info('Done with vocabulary collection')
 
     # loading ner/pos tagging vocab
@@ -138,9 +139,9 @@ def main():
     with open(meta_path, 'wb') as f:
         pickle.dump(meta, f)
 
-    logger.info('building training data')
-    train_fout = gen_name(args.data_dir, args.train_data, version)
-    build_data(train_data, vocab, vocab_tag, vocab_ner, train_fout, True, NLP=NLP, v2_on=v2_on)
+    # logger.info('building training data')
+    # train_fout = gen_name(args.data_dir, args.train_data, version)
+    # build_data(train_data, vocab, vocab_tag, vocab_ner, train_fout, True, NLP=NLP, v2_on=v2_on)
 
     logger.info('building dev data')
     dev_fout = gen_name(args.data_dir, args.dev_data, version)
