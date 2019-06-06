@@ -30,7 +30,7 @@ DEBUG_SIZE = 2000
 
 NLP = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
 
-def load_data(path, is_train=True, v2_on=False):
+def load_data(path, is_train=True, v2_on=False):  
     rows = []
     with open(path, encoding="utf8") as f:
         data = json.load(f)['data']
@@ -112,9 +112,10 @@ def main():
     else:
         logger.info('Loading glove vocab.')
     # load data
-    train_data = load_data(train_path, v2_on=v2_on)
+    # train_data = load_data(train_path, v2_on=v2_on)
     dev_data = load_data(valid_path, False, v2_on=v2_on)
 
+    ## TODO Need to candle this loading only once...
     wemb_vocab = load_emb_vocab(emb_path, embedding_dim, fast_vec_format=args.fasttext_on)
     logger.info('Build vocabulary')
     vocab, _, _ = build_vocab(train_data + dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
@@ -124,11 +125,12 @@ def main():
     resource_path = 'resource'
     logger.info('Loading resource')
 
+    ## TODO Need to candle the below two loading only once.. this loading only once...
     with open(os.path.join(resource_path, 'vocab_tag.pick'),'rb') as f:
         vocab_tag = pickle.load(f)
     with open(os.path.join(resource_path,'vocab_ner.pick'),'rb') as f:
         vocab_ner = pickle.load(f)
-
+    ## TODO Need to candle the below two loading only once.. this loading only once...
     meta_path = gen_name(args.data_dir, args.meta, version, suffix='pick')
     logger.info('building embedding')
     embedding = build_embedding(emb_path, vocab, embedding_dim, fast_vec_format=args.fasttext_on)

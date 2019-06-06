@@ -1,6 +1,15 @@
 # python predict_ans.py --dev_data  dev-v1.0.json
 # # is_train=False  fro prediction.. BAtchGen  def __init__ in batcher.py file
 # def feature_func(sample, query_tokend, doc_tokend, vocab, vocab_tag, vocab_ner, is_train=False, v2_on=False):
+"""
+
+# For prediction  previously formed embedding meta_v1.pick file is required. This will keep the embedding matrix vector intact..
+# convert the test document into proper input file forming the vector and other questions...
+# vector file...as the structure of dev_data_v1.json, train_data_v1.json.
+#  
+
+
+"""
 import re
 import os
 import sys
@@ -86,6 +95,7 @@ def main():
         test_gold = load_squad(test_gold_path)
 
     model = DocReaderModel(opt, embedding)  ### model = your_model()
+    # model = torch.load("./checkpoint/checkpoint_v1_epoch_2_full_model.pt")
     
     # model meta str
     headline = '############# Model Arch of SAN #############'
@@ -115,20 +125,21 @@ def main():
     # load the best model from disk...
     # import pdb;pdb.set_trace()
     f'loading the model from disk........'
-    path1 = '/home/amuthuraman/san_mrc/checkpoint/checkpoint_v1_epoch_0_full_model.pt'
+    path1 = './checkpoint/checkpoint_v1_epoch_2_full_model.pt'
     # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     # checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     model = torch.load(path1)
 
    
     results, labels = predict_squad(model, dev_data, v2_on=args.v2_on)
-    if args.v2_on:
-        metric = evaluate_v2(dev_gold, results, na_prob_thresh=args.classifier_threshold)
-        em, f1 = metric['exact'], metric['f1']
-        acc = compute_acc(labels, dev_labels)
-    else:
-        metric = evaluate(dev_gold, results)
-        em, f1 = metric['exact_match'], metric['f1']
+    
+    # if args.v2_on:
+    #     metric = evaluate_v2(dev_gold, results, na_prob_thresh=args.classifier_threshold)
+    #     em, f1 = metric['exact'], metric['f1']
+    #     acc = compute_acc(labels, dev_labels)
+    # else:
+    #     metric = evaluate(dev_gold, results)
+    #     em, f1 = metric['exact_match'], metric['f1']
 
 
     output_path = os.path.join(model_dir, 'dev_output_{}.json'.format(epoch))
@@ -150,32 +161,32 @@ def main():
                     test_metric = evaluate(test_gold, test_results)
                     test_em, test_f1 = test_metric['exact_match'], test_metric['f1']
 
-        # setting up scheduler
-        if model.scheduler is not None:
-            logger.info('scheduler_type {}'.format(opt['scheduler_type']))
-            if opt['scheduler_type'] == 'rop':
-                model.scheduler.step(f1, epoch=epoch)
-            else:
-                model.scheduler.step()
-        # save
-        model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
+        # # setting up scheduler
+        # if model.scheduler is not None:
+        #     logger.info('scheduler_type {}'.format(opt['scheduler_type']))
+        #     if opt['scheduler_type'] == 'rop':
+        #         model.scheduler.step(f1, epoch=epoch)
+        #     else:
+        #         model.scheduler.step()
+        # # save
+        # model_file = os.path.join(model_dir, 'checkpoint_{}_epoch_{}.pt'.format(version, epoch))
 
-        model.save(model_file, epoch)
-        if em + f1 > best_em_score + best_f1_score:
-            copyfile(os.path.join(model_dir, model_file), os.path.join(model_dir, 'best_{}_checkpoint.pt'.format(version)))
-            best_em_score, best_f1_score = em, f1
-            logger.info('Saved the new best model and prediction')
+        # model.save(model_file, epoch)
+        # if em + f1 > best_em_score + best_f1_score:
+        #     copyfile(os.path.join(model_dir, model_file), os.path.join(model_dir, 'best_{}_checkpoint.pt'.format(version)))
+        #     best_em_score, best_f1_score = em, f1
+        #     logger.info('Saved the new best model and prediction')
 
-        logger.warning("Epoch {0} - dev EM: {1:.3f} F1: {2:.3f} (best EM: {3:.3f} F1: {4:.3f})".format(epoch, em, f1, best_em_score, best_f1_score))
-        if args.v2_on:
-            logger.warning("Epoch {0} - ACC: {1:.4f}".format(epoch, acc))
-        if metric is not None:
-            logger.warning("Detailed Metric at Epoch {0}: {1}".format(epoch, metric))
+        # logger.warning("Epoch {0} - dev EM: {1:.3f} F1: {2:.3f} (best EM: {3:.3f} F1: {4:.3f})".format(epoch, em, f1, best_em_score, best_f1_score))
+        # if args.v2_on:
+        #     logger.warning("Epoch {0} - ACC: {1:.4f}".format(epoch, acc))
+        # if metric is not None:
+        #     logger.warning("Detailed Metric at Epoch {0}: {1}".format(epoch, metric))
 
-        if (test_data is not None) and (test_gold is not None):
-            logger.warning("Epoch {0} - test EM: {1:.3f} F1: {2:.3f}".format(epoch, test_em, test_f1))
-            if args.v2_on:
-                logger.warning("Epoch {0} - test ACC: {1:.4f}".format(epoch, test_acc))
+        # if (test_data is not None) and (test_gold is not None):
+        #     logger.warning("Epoch {0} - test EM: {1:.3f} F1: {2:.3f}".format(epoch, test_em, test_f1))
+        #     if args.v2_on:
+        #         logger.warning("Epoch {0} - test ACC: {1:.4f}".format(epoch, test_acc))
 
 if __name__ == '__main__':
     main()
