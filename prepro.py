@@ -138,7 +138,8 @@ def main():
     # embedding = build_embedding(emb_path, vocab, embedding_dim, fast_vec_format=args.fasttext_on)
     # meta = {'vocab': vocab, 'vocab_tag': vocab_tag, 'vocab_ner': vocab_ner, 'embedding': embedding}
     # load the meta pickle file
-    meta = pickle.load("./data/meta_v1.pick")
+    with open('./data/meta_v1.pick', 'rb') as pickle_file:
+        meta = pickle.load(pickle_file)
     # with open(meta_path, 'wb') as f:
     #     pickle.dump(meta, f)
 
