@@ -116,8 +116,8 @@ def main():
     dev_data = load_data(valid_path, False, v2_on=v2_on)
 
     ## TODO Need to candle this loading only once...
-    wemb_vocab = load_emb_vocab(emb_path, embedding_dim, fast_vec_format=args.fasttext_on)
-    logger.info('Build vocabulary')
+    # wemb_vocab = load_emb_vocab(emb_path, embedding_dim, fast_vec_format=args.fasttext_on)
+    # logger.info('Build vocabulary')
 
     # commenting out the vocab building section.. as it is not needed for testing
     # vocab, _, _ = build_vocab(dev_data, wemb_vocab, sort_all=args.sort_all, clean_on=True, cl_on=False)
