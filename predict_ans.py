@@ -130,9 +130,9 @@ def main():
     # checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     model = torch.load(path1)
 
-   
+    logger.info("Loaded the model from")
     results, labels = predict_squad(model, dev_data, v2_on=args.v2_on)
-    
+
     # if args.v2_on:
     #     metric = evaluate_v2(dev_gold, results, na_prob_thresh=args.classifier_threshold)
     #     em, f1 = metric['exact'], metric['f1']
