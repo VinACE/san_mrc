@@ -86,7 +86,7 @@ def main():
     # model = DocReaderModel(opt, embedding)
     # performing a transfer learning  
     # https://pytorch.org/tutorials/beginner/saving_loading_models.html
-    model = torch.load("./checkpoint/checkpoint_v1_epoch_2_full_model.pt")
+    model = torch.load("./checkpoint/checkpoint_v1_epoch_24_full_model.pt")
 
     # model meta str
     headline = '############# Model Arch of SAN #############'
