@@ -48,7 +48,7 @@ def load_data(path, is_train=False, v2_on=False):
                 req_num_q = num_q
             for qa in paragraph['qas'][:req_num_q]:
                 uid, question = qa['id'], qa['question']
-                # answers = qa.get('answers', [])  ## commented out for empty answers
+                # answers = qa.get('answers', [])  ## commented out f
                 answers = []
                 # used for v2.0
                 is_impossible = qa.get('is_impossible', False)
