@@ -125,7 +125,7 @@ def main():
     # load the best model from disk...
     # import pdb;pdb.set_trace()
     f'loading the model from disk........'
-    path1 = './checkpoint/checkpoint_v1_epoch_2_full_model.pt'
+    path1 = './checkpoint/checkpoint_v1_epoch_24_full_model.pt'
     # model = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     # checkpoint_test = torch.load('/home/ofsdms/san_mrc/checkpoint/best_v1_checkpoint.pt', map_location='cpu')
     model = torch.load(path1)
