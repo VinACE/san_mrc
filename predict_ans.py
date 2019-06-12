@@ -145,8 +145,10 @@ def main():
     output_path = os.path.join(model_dir, 'dev_output_{}.json'.format(epoch))
     with open(output_path, 'w') as f:
         json.dump(results, f)
+        logger.info("Done with prediction")
 
         if test_data is not None:
+            logger.info("entering test_data section to print the test prediction")
             test_results, test_labels = predict_squad(model, test_data, v2_on=args.v2_on)
             test_output_path = os.path.join(model_dir, 'test_output_{}.json'.format(epoch))
             with open(test_output_path, 'w') as f:

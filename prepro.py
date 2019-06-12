@@ -30,7 +30,7 @@ DEBUG_SIZE = 2000
 
 NLP = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
 
-def load_data(path, is_train=True, v2_on=False):  
+def load_data(path, is_train=False, v2_on=False):  
     rows = []
     with open(path, encoding="utf8") as f:
         data = json.load(f)['data']
@@ -97,10 +97,10 @@ def main():
     logger.warning(msg)
     if DEBUG_ON:
         logger.error('***DEBUGING MODE***')
-    train_path = os.path.join(args.data_dir, train_path)
+    # train_path = os.path.join(args.data_dir, train_path)
     valid_path = os.path.join(args.data_dir, dev_path)
 
-    logger.info('The path of training data: {}'.format(train_path))
+    # logger.info('The path of training data: {}'.format(train_path))
     logger.info('The path of validation data: {}'.format(valid_path))
     logger.info('{}-dim word vector path: {}'.format(args.embedding_dim, args.glove))
     # could be fasttext embedding
